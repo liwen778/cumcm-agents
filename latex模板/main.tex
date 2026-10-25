@@ -1,0 +1,438 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% =====================================================================
+% 可复用中文论文骨架模板（基于原赛题模板清空正文重制，JXUSTmodeling 版式）
+% 使用说明：
+%   1. 编译必须用 XeLaTeX，连跑两遍（或运行 build.bat / build.sh）
+%   2. 图片统一放入 figures/ 目录，正文按文件名引用（不带路径与扩展名也可）
+%   3. 正文中标注「示例」的图表仅演示版式，写作时替换为实际内容
+%   4. 标注「(待补充：…)」处为按赛事/论文实际情况需要填写的内容
+%   5. 模板保留的图表格式清单见同目录《模板说明.md》
+% =====================================================================
+\documentclass{JXUSTmodeling}
+% Please add the following required packages to your document preamble:
+\usepackage{longtable} 
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{pythonhighlight}
+%\usepackage{subfigure}
+\usepackage{caption,subcaption}
+\usepackage{ctex}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{multirow}  % 请确保导言区有这行，JXUSTmodeling.cls 通常已自带
+
+\lstset{
+	backgroundcolor=\color{white},      % 底色白色
+	basicstyle=\ttfamily\small,
+	breaklines=true,                    % 长代码自动换行
+	breakindent=0pt,                    % 换行续行不缩进，保持左对齐
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=6pt,
+	frame=single,                       % 加一圈细边框，把代码圈起来
+	rulecolor=\color{black},            % 边框黑色
+	keywordstyle=\color{blue},
+	commentstyle=\color{teal!80},       % 注释：蓝绿色
+	stringstyle=\color{red!75},
+	showstringspaces=false,
+	tabsize=4,
+	columns=flexible
+}
+
+
+% 恢复 enumerate 默认缩进（覆盖 JXUSTmodeling.cls 的 leftmargin=0pt）
+\setlist[enumerate,1]{leftmargin=*,labelsep=0.5em,itemsep=0pt,parsep=0pt}
+
+% 注意：以下字体设置为 Windows 环境预设（宋体正文、黑体加粗、楷体斜体）；
+% 在非 Windows 环境编译时需替换为本机可用的中文字体。
+\setCJKmainfont[BoldFont={SimHei}, ItalicFont={KaiTi}]{SimSun}
+
+\begin{document}
+
+% ==================== 标题与关键词 ====================
+% (待补充：论文标题；关键词 3~5 个，以"；"分隔)
+\biaoti{标题}
+\keyword{}
+
+% ==================== 摘要 ====================
+% (待补充：摘要正文，控制在一页以内)
+\begin{abstract}
+
+
+\end{abstract}
+
+% 原模板无目录页；如需目录，取消下一行注释
+% \tableofcontents
+
+% ==================== 一、问题重述 ====================
+\section{问题重述}
+\subsection{问题背景}
+% (待补充：研究背景)
+
+\subsection{问题提出}
+% (待补充：逐条简述各问需要解决的问题)
+
+% ==================== 二、问题分析 ====================
+\section{问题分析}
+
+\subsection{问题一的分析}
+% (待补充：只写思路，不写结果)
+
+\subsection{问题二的分析}
+% (待补充)
+
+\subsection{问题三的分析}
+% (待补充)
+
+\subsection{问题四的分析}
+% (待补充：按实际问数增删)
+
+\subsection{全文总体框架}
+% (待补充：全文各问之间的输入输出关系，可配流程图)
+
+% ==================== 三、模型假设 ====================
+\section{模型假设}
+\begin{enumerate}[label=\arabic*., wide=0pt, labelsep=0.5em]
+	\item % (待补充：假设1，需与"模型的缺点"呼应)
+	\item % (待补充：假设2)
+	\item % (待补充：假设3)
+	\item % (待补充：假设4)
+\end{enumerate}
+
+% ==================== 四、符号说明 ====================
+% 表格格式 T1：跨页长表 longtable（自动续表头，三线加粗样式）
+% 写作时随用随补，示例符号请全部替换
+\section{符号说明}
+\begin{longtable}{ccc}
+	\caption{主要符号说明}
+	\label{tab:symbol}\\
+	\toprule[1.5pt]
+	符号 & 含义 & 单位 \\
+	\midrule
+	\endfirsthead
+	\caption[]{主要符号说明(续)}\\
+	\toprule[1.5pt]
+	符号 & 含义 & 单位 \\
+	\midrule
+	\endhead
+	\bottomrule[1.5pt]
+	\endfoot
+	$x$ & 决策变量示例 & $-$ \\
+	$f(\cdot)$ & 目标函数示例 & $-$ \\
+	$T$ & 时段总数示例 & 个 \\
+	$\Delta t$ & 时段步长示例 & $\mathrm{h}$ \\
+	$\alpha$ & 步长因子示例 & $-$ \\
+	$\beta$ & 折算系数示例 & $-$ \\
+\end{longtable}
+
+% ==================== 五、模型准备 ====================
+\section{模型准备}
+
+\subsection{数据侧写}
+% (待补充：数据总体描述)
+
+% ---------- 图片格式 F1：单图定宽（[H] 强制当前位置） ----------
+% 示例图片 figures/KingL.png 为白底黑字占位图，写作时替换为实际图片
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{KingL.png}
+	\caption{单图版式示例（占位图）}
+	\label{fig:single_demo}
+\end{figure}
+% (待补充：图后紧跟分析文字，句式如"由图X可知……")
+
+% ---------- 图片格式 F2：并排子图（模板预留，未启用） ----------
+% 原模板加载了 subcaption 宏包但正文未使用子图；如需并排子图，
+% 取消以下注释即可使用，图片仍用 figures/KingL.png 占位：
+% \begin{figure}[H]
+% 	\centering
+% 	\begin{subfigure}[b]{0.48\textwidth}
+% 		\centering
+% 		\includegraphics[width=\textwidth]{KingL.png}
+% 		\caption{子图一占位}
+% 		\label{fig:sub_demo_a}
+% 	\end{subfigure}
+% 	\hfill
+% 	\begin{subfigure}[b]{0.48\textwidth}
+% 		\centering
+% 		\includegraphics[width=\textwidth]{KingL.png}
+% 		\caption{子图二占位}
+% 		\label{fig:sub_demo_b}
+% 	\end{subfigure}
+% 	\caption{并排子图版式示例（占位图）}
+% 	\label{fig:sub_demo}
+% \end{figure}
+
+\subsection{误差特征分析}
+% (待补充：按需改名或删除本小节；如做预测误差统计，
+%  可参考「符号说明」处的 longtable 格式再建一张误差汇总表)
+
+% ==================== 六~九、各问模型建立与求解 ====================
+% 每问统一为「模型建立 / 模型求解 / 求解结果与分析」三段骨架，
+% 问题一中保留了 Step1~Step4 的求解分解小节样式，可按需套用
+
+\section{问题一模型建立与求解}
+% (待补充：本问总起段——解决什么、用什么模型、输出什么)
+
+\subsubsection*{Step1定义决策变量}
+% (待补充：变量定义；多变量定义可参考下面的多行公式版式)
+
+% ---------- 公式版式 E1：多行公式块（编号不参与全文编号） ----------
+\begin{equation*}
+	\left\{
+	\begin{aligned}
+		x_1 &,\text{ 变量一含义占位};\\
+		x_2 &,\text{ 变量二含义占位};\\
+		x_3 &,\text{ 变量三含义占位。}
+	\end{aligned}
+	\right.
+\end{equation*}
+
+\subsubsection*{Step2确立约束条件}
+% (待补充：逐条约束，每条约束后写现实含义)
+
+% ---------- 公式版式 E2：单个编号公式 ----------
+\begin{equation}
+	f(\boldsymbol{x})=\sum_{i=1}^{n} w_i x_i,\quad \boldsymbol{x}\in\mathbb{R}^{n}
+	\label{eq:demo_obj}
+\end{equation}
+式(\ref{eq:demo_obj})中，$w_i$ 为权重占位，$x_i$ 为变量占位（公式参数含义写法示例）。
+
+\subsubsection*{Step3构建目标函数}
+% (待补充：目标函数与取值理由)
+
+\subsubsection*{Step4模型整合}
+% ---------- 公式版式 E3：多行约束整合块 ----------
+\begin{equation*}
+	\begin{aligned}
+		\min_{\boldsymbol{x}} \quad & f(\boldsymbol{x})=\sum_{i=1}^{n} w_i x_i \\
+		\text{s.t.} \quad
+		& \begin{cases}
+			g_j(\boldsymbol{x}) \le 0, \quad j=1,2,\dots,m \quad &\text{(约束含义占位)}\\
+			h_k(\boldsymbol{x}) = 0, \quad k=1,2,\dots,p \quad &\text{(约束含义占位)}\\
+			\boldsymbol{x}\in\mathbb{R}^{n}
+		\end{cases}
+	\end{aligned}
+\end{equation*}
+
+\subsection{模型求解}
+% (待补充：算法选择理由与求解步骤)
+
+\subsection{求解结果与分析}
+% (待补充：结果表/图 + "由表X可知/观察图X可知"分析)
+
+% ---------- 表格格式 T2：全边框表格（|c| 列分隔 + \hline + \multicolumn 合并行） ----------
+% 示例数据为占位数据，写作时全部替换
+\begin{table}[H]
+	\centering
+	\caption{全边框表格版式示例（占位数据）}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		时段 & 数值A & 时段 & 数值B & 时段 & 数值C \\
+		\hline
+		第1段 & 1.20 & 第2段 & 3.40 & 第3段 & 2.80 \\
+		\hline
+		第4段 & 4.15 & 第5段 & 2.05 & 第6段 & 0.75 \\
+		\hline
+		\multicolumn{2}{|c|}{合计/数值A} & \multicolumn{4}{c|}{14.35} \\
+		\hline
+	\end{tabular}
+	\label{tab:boxed_demo}
+\end{table}
+
+\section{问题二模型建立与求解}
+\subsection{模型建立}
+% (待补充；衔接句写法示例："问题二建立在问题一的基础之上，要求……")
+
+\subsection{模型求解}
+% (待补充)
+
+\subsection{求解结果与分析}
+% (待补充)
+
+\section{问题三模型建立与求解}
+\subsection{模型建立}
+% (待补充)
+
+\subsection{模型求解}
+% (待补充)
+
+\subsection{求解结果与分析}
+% (待补充)
+
+% ---------- 表格格式 T3：标准三线表（booktabs：\toprule/\midrule/\bottomrule） ----------
+% 示例数据为占位数据，写作时全部替换
+\begin{table}[H]
+	\centering
+	\small
+	\setlength{\tabcolsep}{6pt}
+	\caption{标准三线表版式示例（占位数据）}
+	\label{tab:booktabs_demo}
+	\begin{tabular}{lrrrr}
+		\toprule
+		方法 & 指标一 & 指标二 & 指标三 & 指标四 \\
+		\midrule
+		方法A & 0.812 & 12.6 & 3.45 & 0.27 \\
+		方法B & 0.905 & 9.8  & 2.91 & 0.31 \\
+		方法C & 0.877 & 10.4 & 3.08 & 0.29 \\
+		方法D & 0.931 & 8.7  & 2.64 & 0.35 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+% ---------- 表格格式 T4：三线表 + 合并单元格（\multirow 纵向合并 + \multicolumn 横向合并） ----------
+% 示例数据为占位数据，写作时全部替换
+\begin{table}[H]
+	\centering
+	\small
+	\setlength{\tabcolsep}{8pt}
+	\caption{合并单元格三线表版式示例（占位数据）}
+	\label{tab:multirow_demo}
+	\begin{tabular}{llccc}
+		\toprule
+		方案 & 指标 & 场景一 & 场景二 & 场景三 \\
+		\midrule
+		\multirow{2}{*}{方案A} & 指标一 & 81.5 & 76.2 & 88.0 \\
+		& 指标二 & 64.3 & 69.7 & 72.1 \\
+		\midrule
+		\multirow{2}{*}{方案B} & 指标一 & 85.2 & 79.4 & 83.6 \\
+		& 指标二 & 70.8 & 66.5 & 74.9 \\
+		\midrule
+		\multirow{2}{*}{方案C} & 指标一 & 78.9 & 82.3 & 80.7 \\
+		& 指标二 & 61.2 & 71.8 & 68.4 \\
+		\midrule
+		备注 & \multicolumn{4}{c}{三个方案在三个场景下均为占位数据} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+% ---------- 表格格式 T5：带自动换行宽列的三线表（p{} 列 + \addlinespace 行距） ----------
+% 适用：某列文字较长需要限定宽度自动换行；示例数据为占位数据
+\begin{table}[H]
+	\centering
+	\small
+	\setlength{\tabcolsep}{4pt}
+	\caption{自动换行宽列三线表版式示例（占位数据）}
+	\label{tab:pcolumn_demo}
+	\begin{tabular}{cp{9.4cm}c}
+		\toprule
+		编号 & 说明（长文本自动换行列） & 数值 \\
+		\midrule
+		1 & 此处填写较长的说明文字占位：用于演示 p 列在文字过长时自动换行、行内左对齐的版式效果。 & 12.6 \\
+		\addlinespace
+		2 & 此处填写较长的说明文字占位：说明列宽度由 p{9.4cm} 控制，可按版面自行调整。 & 8.9 \\
+		\addlinespace
+		3 & 此处填写较长的说明文字占位：记录行之间的 addlinespace 命令用于在三线表中适度增加行间距。 & 10.3 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\section{问题四模型建立与求解}
+% (待补充：按实际问数增删本章)
+\subsection{模型建立}
+% (待补充)
+\subsection{模型求解}
+% (待补充)
+\subsection{求解结果与分析}
+% (待补充)
+
+% ==================== 十、模型检验与灵敏度分析 ====================
+\section{模型检验与灵敏度分析}
+% (待补充：优化/物理类题写灵敏度分析；统计/机器学习类题写稳健性检验)
+
+% ==================== 十一、模型评价与推广 ====================
+\section{模型评价与推广}
+\subsection{模型的优点}
+\begin{enumerate}[label=\arabic*., wide=0pt, labelsep=0.5em]
+	\item % (待补充：每条扣具体机制，禁止空泛)
+	\item % (待补充)
+	\item % (待补充)
+\end{enumerate}
+
+\subsection{模型的缺点}
+\begin{enumerate}[label=\arabic*., wide=0pt, labelsep=0.5em]
+	\item % (待补充：每条对应一个简化假设，与"模型假设"呼应)
+	\item % (待补充)
+	\item % (待补充)
+\end{enumerate}
+
+\subsection{模型的改进}
+\begin{enumerate}[label=\arabic*., wide=0pt, labelsep=0.5em]
+	\item % (待补充)
+	\item % (待补充)
+	\item % (待补充)
+\end{enumerate}
+
+\subsection{模型的推广}
+\begin{enumerate}[label=\arabic*., wide=0pt, labelsep=0.5em]
+	\item % (待补充)
+	\item % (待补充)
+	\item % (待补充)
+\end{enumerate}
+
+% ==================== AI 工具使用声明 ====================
+% 位置约定（必须保留）：正文（模型评价与推广）之后、参考文献之前
+\section*{AI工具使用声明}
+本参赛队在竞赛过程中使用了AI工具，主要用于语言润色、代码调试等，详细使用情况见支撑材料。
+% (待补充：按赛事当年通知要求，补充具体工具名称、使用范围与内容产出说明)
+
+% ==================== 参考文献 ====================
+% 参考文献样式与原模板一致：\section* + \refname 清空 + thebibliography 手工条目
+% 以下两条为 GB/T 7714 格式占位示例，写作时按实际引用替换
+\section*{参考文献}
+\renewcommand{\refname}{}
+\vspace{-2em}
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0pt}
+	\bibitem[1]{ref_journal_demo}
+作者一,作者二,作者三,等. 文献题名占位[J]. 期刊名称占位, 2024, 45(3): 12-20.
+	\bibitem[2]{ref_book_demo}
+作者四. 书名占位[M]. 2版. 出版地占位: 出版社名称占位, 2023: 55-60.
+\end{thebibliography}
+
+% ==================== 附录 ====================
+\newpage
+	%附录
+\section*{附录A文件明细}
+% 表格格式 T1 变体：附录文件清单同样使用跨页 longtable
+\begin{longtable}{cc}
+	\caption{代码文件列表}
+	\label{tab:codefile}\\
+	\toprule[1.5pt]
+	文件名 & 文件描述 \\
+	\midrule
+	\endfirsthead
+	\caption[]{代码文件列表(续)}\\
+	\toprule[1.5pt]
+	文件名 & 文件描述 \\
+	\midrule
+	\endhead
+	\bottomrule[1.5pt]
+	\endfoot
+	code/q1.m & MATLAB 代码示例（附录B 由 lstinputlisting 引入） \\
+	code/q1.py & Python 代码示例（附录B 由 lstinputlisting 引入） \\
+\end{longtable}
+
+\section*{附录B代码}
+% 代码不写在正文里，统一用 \lstinputlisting 从外部文件引入；
+% 全部代码文件集中放在同目录的 code/ 文件夹中：
+%   MATLAB：\lstinputlisting[language=Matlab]{code/q1.m}
+%   Python：\lstinputlisting[language=Python]{code/q1.py}
+% 代码外观（黑色细边框、左侧行号、关键字蓝色、注释蓝绿色、字符串红色）
+% 由导言区 \lstset 统一控制，无需在正文重复设置；
+% 换成你自己的代码时，只需替换 code/ 下对应的文件，或修改下面的路径
+
+\subsection*{B.1 MATLAB 代码（q1.m）}
+\lstinputlisting[language=Matlab]{code/q1.m}
+
+\subsection*{B.2 Python 代码（q1.py）}
+\lstinputlisting[language=Python]{code/q1.py}
+
+\end{document}

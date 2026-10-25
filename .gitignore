@@ -1,0 +1,37 @@
+# LaTeX 编译产物
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.synctex\(busy\)
+*.toc
+*.xdv
+*.pdf
+
+# 论文工作区（每场比赛自建，不入库）
+论文/
+
+# 比赛私有数据：题目与产出按当年情况自定，默认不入库
+题目/
+题目报告/
+数据预处理/
+代码/
+
+# 备份与临时文件
+*.bak
+*.bak_*
+*~
+._*
+.DS_Store
+Thumbs.db
+._draft*.md
+_verify.pdf
+hermes-tmp.*
+
+# 编辑器
+.vscode/
+.idea/
