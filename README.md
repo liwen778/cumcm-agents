@@ -4,7 +4,7 @@
 
 - **5+1 个 Skill（技能提示词）**：读题分析 → 数据清洗 → 代码生成 → 论文撰写 → 裁判审查，覆盖建模全流程；
 - **双智能体协作模式**：一个智能体当"选手"（干活），一个当"裁判"（独立复核），互不轻信；
-- **可直接编译的 LaTeX 模板**：基于开源的 `JXUSTmodeling` 类，做了跨平台字体兼容与一键编译脚本。
+- **可直接编译的 LaTeX 模板**：国赛（`latex模板/`）与 MathorCup（`MathorCup模板/`）两套，同一套版式，均已做跨平台字体兼容与一键编译脚本。
 
 > 零路径配置：全部 Skill 与文档均使用**相对路径**，克隆到任何位置、叫任何名字都能直接用。
 
@@ -20,7 +20,8 @@
 ├── 比赛日速查.md                # 比赛当天的精简操作卡
 ├── .claude/skills/            # Claude Code（选手侧）技能库
 ├── .hermes/skills/            # Hermes（裁判侧）技能库，内容与左侧一致
-├── latex模板/                  # LaTeX 模板：JXUSTmodeling.cls + 干净骨架 main.tex（含AI声明章节）+ code/ 示例代码 + 一键编译脚本
+├── latex模板/                  # 国赛/CUMCM 模板：JXUSTmodeling.cls + 干净骨架 main.tex（含AI声明章节）+ code/ 示例代码 + 一键编译脚本
+├── MathorCup模板/               # MathorCup（妈妈杯）模板：同版式 + 目录页 + 正文页码从1起 + AI声明后置 + 附录软件清单
 ├── AI使用报告模板/               # 国赛官方要求的《AI工具使用详情》报告模板（Word）及配套使用说明
 └── 优秀论文/                    # 放你自己的范文 PDF；蒸馏出的《写作规范.md》在这里
 ```
@@ -44,7 +45,7 @@
 |------|------|------|
 | [Claude Code](https://claude.com/claude-code) | 选手智能体 | 必需；在本目录下运行 `claude` 即自动加载 `.claude/skills/` 与 `CLAUDE.md` |
 | Hermes（裁判智能体） | 裁判 | 可选；独立工具需另行安装配置。没有 Hermes 时，可把 `.hermes/skills/national-c-judge-review` 复制到 `.claude/skills/`，用第二个 Claude Code 会话当裁判 |
-| TeX Live 2023+（full 安装）或 MiKTeX | 论文编译 | 编译入口见 `latex模板/README.md`；西文缺 Times New Roman 时自动回退开源字体；中文默认用 Windows 自带字体，非 Windows 需改一行设置（见同目录 README） |
+| TeX Live 2023+（full 安装）或 MiKTeX | 论文编译 | 国赛编译入口见 `latex模板/README.md`，MathorCup 见 `MathorCup模板/README.md`；西文缺 Times New Roman 时自动回退开源字体；中文在 Windows 下用系统宋体、非 Windows 回退 Fandol，无需改设置 |
 | MATLAB R2019b+（含常用工具箱） | 求解代码 | 推荐；未安装时让智能体生成 Python 版代码 |
 | Python 3.9+（pandas / numpy / matplotlib / openpyxl） | 备选平台 | `python` 需在 PATH 中 |
 
@@ -75,12 +76,30 @@ hermes
 ### 3. 先验证 LaTeX 能编译
 
 ```powershell
-cd latex模板
+cd latex模板        # 国赛模板
 ./build.bat      # Windows
 ./build.sh       # macOS / Linux
+
+cd ..\MathorCup模板   # MathorCup 模板（同样的命令）
+./build.bat
 ```
 
 看到 `build OK: main.pdf` 即模板可用。论文阶段的正式工作区是 `论文\`（把模板复制过去使用，见手册阶段 5）。
+
+### 4. 两套模板怎么选
+
+两套模板版式同源（字体、字号、行距、章节编号、图表标题、附录代码样式完全一致），差别只在赛事规范要求的页面结构：
+
+| | `latex模板/`（国赛/CUMCM） | `MathorCup模板/`（妈妈杯） |
+|---|---|---|
+| 首页 | 题目 + 摘要 + 关键词 | 队伍编号/题号 + 题目 + 摘要 + 关键词 |
+| 目录 | 无（可选） | **必需，固定第 2 页** |
+| 页码 | 从首页起算 | **从正文起算**，首页与目录不编号 |
+| 页眉 | 无 | 无（规范强制） |
+| AI 声明 | 参考文献**之前** | 参考文献**之后**，且参考文献需增列工具条目 |
+| 附录 | 文件明细 + 代码 | 文件明细 + **软件与运行命令** + 代码 |
+
+拿不准时看赛事当年的《论文格式及提交规范》原文，两条硬性差异是"目录页位置/页码起算"和"AI 声明位置"。
 
 ## 路径约定（为什么不需要改任何路径）
 
